@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emerson Porfa | Audio Specialist</title>
+    <meta name="description" content="Soluções profissionais de áudio: Mixagem, Masterização, TV e Shows. 35 anos de experiência." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-DfxGCi9C.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-AL_03028.css">
+</head>
+  <body class="antialiased selection:bg-white selection:text-black bg-black text-white">
+    <div id="root"></div>
+    
+    <!-- Entry Point for Vite Build -->
+
+    <!-- Script to handle scroll animations -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, {
+          threshold: 0.1
+        });
+
+        // Small delay to ensure React has mounted
+        setTimeout(() => {
+          const reveals = document.querySelectorAll('.reveal');
+          reveals.forEach(el => observer.observe(el));
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
