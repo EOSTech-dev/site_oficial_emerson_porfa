@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Facebook, ExternalLink } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, ExternalLink } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const BLOG_URL = "https://www.blog.emersonporfaaudio.com.br";
@@ -13,26 +13,32 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex gap-8 items-center">
-            {/* Blog Link Footer Externo */}
-            <a 
-              href={BLOG_URL} 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors uppercase text-xs tracking-widest flex items-center gap-2"
-            >
-                Blog <ExternalLink className="w-3 h-3" />
+          {/* Blog Link Footer Externo */}
+          <a
+            href={BLOG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors uppercase text-xs tracking-widest flex items-center gap-2"
+          >
+            Blog <ExternalLink className="w-3 h-3" />
+          </a>
+
+          <div className="flex gap-6 items-center border-l border-[var(--accent)] pl-8">
+            <a href="https://www.instagram.com/emersonporfa/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
+              <Instagram className="w-4 h-4" />
+              <span className="hidden md:inline">Instagram</span>
             </a>
-            
-            <div className="flex gap-6 items-center border-l border-white/10 pl-8">
-              <a href="https://www.instagram.com/emersonporfa/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
-                <Instagram className="w-4 h-4" />
-                <span className="hidden md:inline">Instagram</span>
-              </a>
-              <a href="https://web.facebook.com/emerson.porfa" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
-                <Facebook className="w-4 h-4" />
-                <span className="hidden md:inline">Facebook</span>
-              </a>
-            </div>
+            <div className="h-4 w-[1px] bg-[var(--accent)] opacity-40"></div>
+            <a href="https://web.facebook.com/emerson.porfa" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
+              <Facebook className="w-4 h-4" />
+              <span className="hidden md:inline">Facebook</span>
+            </a>
+            <div className="h-4 w-[1px] bg-[var(--accent)] opacity-40"></div>
+            <a href="https://www.linkedin.com/in/emersonporfa/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
+              <Linkedin className="w-4 h-4" />
+              <span className="hidden md:inline">LinkedIn</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>

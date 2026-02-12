@@ -16,24 +16,23 @@ const Header: React.FC = () => {
   const BLOG_URL = "https://www.blog.emersonporfaaudio.com.br";
 
   return (
-    <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScrolled || isMobileMenuOpen ? 'bg-black/95 backdrop-blur-sm py-3 border-b border-white/10' : 'bg-transparent py-6'
-      }`}
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen ? 'bg-black/95 backdrop-blur-sm py-3 border-b border-white/10' : 'bg-transparent py-6'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        
+
         {/* Logo Style: Jeff Moberg (Bold + Lines) */}
         <a href="#" className="flex flex-col group z-50 items-start transform scale-90 origin-left">
           <h1 className="text-xl md:text-2xl font-display font-bold text-white leading-none tracking-tight group-hover:text-neutral-300 transition-colors">
             EMERSON PORFA
           </h1>
           <div className="flex items-center gap-2 w-full mt-1">
-             <div className="h-[1px] bg-neutral-600 flex-grow group-hover:bg-white transition-colors"></div>
-             <span className="text-[8px] md:text-[9px] font-sans font-bold tracking-[0.4em] text-neutral-400 group-hover:text-white transition-colors uppercase">
-               AUDIO
-             </span>
-             <div className="h-[1px] bg-neutral-600 flex-grow group-hover:bg-white transition-colors"></div>
+            <div className="h-[1px] bg-[var(--accent)] flex-grow"></div>
+            <span className="text-[8px] md:text-[9px] font-sans font-bold tracking-[0.4em] text-white transition-colors uppercase">
+              AUDIO
+            </span>
+            <div className="h-[1px] bg-[var(--accent)] flex-grow"></div>
           </div>
         </a>
 
@@ -43,9 +42,9 @@ const Header: React.FC = () => {
           <a href="#sobre" className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300">Sobre</a>
           <a href="#servicos" className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300">Serviços</a>
           <a href="#portfolio" className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300">Portfólio</a>
-          
-          <a 
-            href={BLOG_URL} 
+
+          <a
+            href={BLOG_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300 flex items-center gap-1"
@@ -53,7 +52,7 @@ const Header: React.FC = () => {
             Blog <ExternalLink className="w-3 h-3 mb-1" />
           </a>
 
-          <a 
+          <a
             href="#contato"
             className="text-[10px] font-bold text-black bg-white px-5 py-1.5 hover:bg-neutral-300 transition-all uppercase tracking-[0.2em]"
           >
@@ -62,7 +61,7 @@ const Header: React.FC = () => {
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <button 
+        <button
           className="md:hidden z-50 text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -76,9 +75,9 @@ const Header: React.FC = () => {
             <a onClick={() => setIsMobileMenuOpen(false)} href="#sobre" className="text-2xl font-display text-white uppercase tracking-widest">Sobre</a>
             <a onClick={() => setIsMobileMenuOpen(false)} href="#servicos" className="text-2xl font-display text-white uppercase tracking-widest">Serviços</a>
             <a onClick={() => setIsMobileMenuOpen(false)} href="#portfolio" className="text-2xl font-display text-white uppercase tracking-widest">Portfólio</a>
-            <a 
-              onClick={() => setIsMobileMenuOpen(false)} 
-              href={BLOG_URL} 
+            <a
+              onClick={() => setIsMobileMenuOpen(false)}
+              href={BLOG_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-2xl font-display text-white uppercase tracking-widest flex items-center gap-2"

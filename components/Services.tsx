@@ -25,7 +25,7 @@ const services: ServiceItem[] = [
   {
     id: 'master',
     title: 'Masterização',
-    description: 'Volume competitivo e consistência sonora para streaming.',
+    description: 'Volume competitivo e consistência sonora.',
     icon: Music,
     longDescription: `
       Masterização é a última etapa antes da sua música chegar ao público. É o processo técnico que garante que seu som soará impecável em TODAS as plataformas: Spotify, YouTube, rádio ou TV.
@@ -119,45 +119,60 @@ const Services: React.FC = () => {
 
   const handleOpenModal = (service: ServiceItem) => {
     setSelectedService(service);
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
   };
 
   const handleCloseModal = () => {
     setSelectedService(null);
-    document.body.style.overflow = 'unset'; // Restore scrolling
+    document.body.style.overflow = 'unset';
   };
 
   return (
-    <section id="servicos" className="py-32 bg-neutral-950 border-t border-white/5 relative">
+    <section id="servicos" className="py-24 bg-black border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-20 reveal">
-           <h2 className="text-5xl md:text-7xl font-display font-bold text-white tracking-tighter uppercase mb-4">
-               Serviços<span className="text-neutral-700">.</span>
-           </h2>
-           <div className="w-24 h-1 bg-white"></div>
+        <div className="mb-16 reveal">
+          <div className="accent-line"></div>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-white tracking-tighter uppercase mb-4">
+            Serviços
+          </h2>
+          <p className="text-neutral-500 text-xs tracking-[0.4em] uppercase">Especialidades Técnicas</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-white/10">
+        <div className="flex flex-col gap-0 border-y border-white/10">
           {services.map((service, index) => (
-            <div 
+            <div
               key={service.id}
-              className={`group bg-black border-r border-b border-white/10 p-10 hover:bg-neutral-900 transition-all duration-500 flex flex-col h-full relative reveal delay-${index * 100}`}
+              onClick={() => handleOpenModal(service)}
+              className="group relative flex flex-col md:flex-row items-start md:items-center py-10 md:py-12 px-2 md:px-8 border-b last:border-b-0 border-white/5 cursor-pointer transition-all duration-500 hover:bg-white/[0.02] reveal"
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="mb-8 transform group-hover:-translate-y-2 transition-transform duration-500">
-                <service.icon className="w-12 h-12 text-white mb-6 stroke-[1.5]" />
-                <h3 className="text-2xl font-display font-bold text-white mb-4 tracking-wide uppercase">{service.title}</h3>
-                <p className="text-neutral-400 font-light leading-relaxed mb-8">
-                    {service.description}
-                </p>
+              {/* Vertical Accent Line (Hover only) */}
+              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-[var(--accent)] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
+
+              {/* Icon Container */}
+              <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-12">
+                <div className="w-16 h-16 rack-border flex items-center justify-center bg-black group-hover:border-[var(--accent)] transition-colors duration-500">
+                  <service.icon className="w-6 h-6 text-white group-hover:text-[var(--accent)] transition-colors duration-500 stroke-[1]" />
+                </div>
               </div>
-              
-              <div className="mt-auto">
-                <button 
-                  onClick={() => handleOpenModal(service)}
-                  className="inline-flex items-center gap-3 text-white font-bold text-xs uppercase tracking-[0.2em] group-hover:text-neutral-300 transition-colors focus:outline-none"
-                >
-                    Detalhes <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform" />
-                </button>
+
+              {/* Content */}
+              <div className="flex-grow flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="max-w-xl">
+                  <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2 tracking-tight group-hover:translate-x-2 transition-transform duration-500">
+                    {service.title}
+                  </h3>
+                  <p className="text-neutral-500 font-light leading-relaxed text-sm md:text-base">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-6">
+
+                  <button className="flex items-center gap-3 text-white font-bold text-[10px] uppercase tracking-[0.4em] px-6 py-3 border border-white/10 group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
+                    Expandir
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -167,71 +182,73 @@ const Services: React.FC = () => {
       {/* SERVICE DETAIL MODAL */}
       {selectedService && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity"
+          <div
+            className="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity"
             onClick={handleCloseModal}
           ></div>
 
-          {/* Modal Content */}
-          <div className="relative bg-neutral-900 border border-white/10 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in flex flex-col">
-            
+          <div className="relative bg-[#080808] border border-white/10 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(0,0,0,0.5)] animate-fade-in flex flex-col">
+
             {/* Header */}
-            <div className="p-8 border-b border-white/10 flex justify-between items-start sticky top-0 bg-neutral-900 z-10">
-              <div className="flex items-center gap-4">
-                <selectedService.icon className="w-8 h-8 text-white" />
-                <h3 className="text-3xl font-display font-bold text-white uppercase tracking-wide">
+            <div className="p-8 md:p-12 border-b border-white/5 flex justify-between items-start sticky top-0 bg-[#080808] z-10">
+              <div className="flex flex-col gap-4">
+                <div className="accent-line mb-0"></div>
+                <h3 className="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight">
                   {selectedService.title}
                 </h3>
               </div>
-              <button 
+              <button
                 onClick={handleCloseModal}
-                className="text-neutral-500 hover:text-white transition-colors p-1"
+                className="text-neutral-600 hover:text-white transition-colors p-2 hover:bg-white/5"
               >
-                <X className="w-8 h-8" />
+                <X className="w-6 h-6" />
               </button>
             </div>
 
             {/* Body */}
-            <div className="p-8 md:p-10 space-y-6">
-              <div className="prose prose-invert prose-lg max-w-none">
-                 {selectedService.longDescription.split('\n').map((paragraph, idx) => (
-                    paragraph.trim() && (
-                      <p key={idx} className="text-neutral-300 font-light leading-relaxed text-base md:text-lg mb-4">
-                        {paragraph.trim()}
-                      </p>
-                    )
-                 ))}
+            <div className="p-8 md:p-12 space-y-10">
+              <div className="prose prose-invert max-w-none">
+                {selectedService.longDescription.split('\n').map((paragraph, idx) => (
+                  paragraph.trim() && (
+                    <p key={idx} className="text-neutral-400 font-light leading-relaxed text-base md:text-lg mb-6">
+                      {paragraph.trim()}
+                    </p>
+                  )
+                ))}
               </div>
 
-              {/* Feature List (Visual enhancement) */}
-              <div className="bg-black/40 p-6 rounded border border-white/5 mt-6">
-                  <p className="text-sm font-bold text-white uppercase tracking-widest mb-4">Diferenciais</p>
-                  <ul className="space-y-3">
-                      <li className="flex items-center gap-3 text-neutral-400 text-sm">
-                          <CheckCircle2 className="w-4 h-4 text-white" />
-                          <span>Atendimento personalizado</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-neutral-400 text-sm">
-                          <CheckCircle2 className="w-4 h-4 text-white" />
-                          <span>Equipamentos de ponta</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-neutral-400 text-sm">
-                          <CheckCircle2 className="w-4 h-4 text-white" />
-                          <span>Prazos respeitados rigorosamente</span>
-                      </li>
+              {/* Technical Spec Drawer */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-white/5 pt-10">
+                <div className="space-y-4">
+                  <p className="text-[10px] font-bold text-white uppercase tracking-[0.3em]">Protocolo de Entrega</p>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-4 text-neutral-500 text-sm">
+                      <span className="text-[var(--accent)] mt-1">•</span>
+                      <span>Análise técnica preliminar de todo material bruto.</span>
+                    </li>
+                    <li className="flex items-start gap-4 text-neutral-500 text-sm">
+                      <span className="text-[var(--accent)] mt-1">•</span>
+                      <span>Processamento através de conversores High-End.</span>
+                    </li>
                   </ul>
+                </div>
+                <div className="bg-black border border-white/5 p-8 flex flex-col justify-center">
+                  <p className="text-xs text-neutral-400 mb-6 italic leading-relaxed">
+                    "Cada fader movido tem um propósito: servir à emoção da música através da precisão técnica."
+                  </p>
+                  <span className="text-[10px] text-white font-bold tracking-widest uppercase">— Emerson Porfa</span>
+                </div>
               </div>
             </div>
 
-            {/* Footer / CTA */}
-            <div className="p-8 border-t border-white/10 bg-neutral-950">
-              <a 
+            {/* Footer */}
+            <div className="p-8 md:p-12 border-t border-white/5 bg-black">
+              <a
                 href="#contato"
                 onClick={handleCloseModal}
-                className="block w-full bg-white text-black font-bold py-4 text-center uppercase tracking-[0.2em] hover:bg-neutral-200 transition-colors font-display"
+                className="btn-technical block w-full text-center"
               >
-                Solicitar Orçamento
+                Solicitar Orçamento Técnico
               </a>
             </div>
 
