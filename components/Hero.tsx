@@ -13,19 +13,19 @@ const Hero: React.FC = () => {
 
         {/* Left: Typography */}
         <div className="w-full md:w-3/5 reveal z-20">
-          <h1 className="text-7xl md:text-9xl font-display font-bold leading-[0.85] tracking-tighter mb-4 max-w-2xl">
-            EMERSON<br />
-            <span className="text-outline text-transparent opacity-80" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>PORFA</span>
+          <h1 className="text-5xl md:text-7xl font-display font-bold leading-[0.9] tracking-tighter mb-4 max-w-3xl uppercase">
+            Engenheiro de Áudio<br />
+            <span className="text-outline text-transparent opacity-80" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>Especialista em Mixagem</span>
           </h1>
 
           <div className="flex items-center gap-4 mb-10">
             <div className="h-[2px] w-20 bg-[var(--accent)]"></div>
-            <span className="text-xs font-bold text-white uppercase tracking-[0.4em]">ÁUDIO</span>
+            <span className="text-xs font-bold text-white uppercase tracking-[0.4em]">SHOWS • ESTÚDIO • TV</span>
             <div className="h-[2px] w-20 bg-[var(--accent)]"></div>
           </div>
 
-          <p className="text-lg md:text-xl text-neutral-400 max-w-md leading-relaxed mb-12 font-light border-l border-white/10 pl-8">
-            Somando experiência em estrada e estúdio para entregar a melhor solução técnica em áudio. Compromisso com a qualidade do sinal e o respeito aos detalhes que fazem cada espetáculo único.
+          <p className="text-lg md:text-xl text-neutral-400 max-w-2xl leading-relaxed mb-12 font-light border-l border-white/10 pl-8">
+            Mais de 35 anos de experiência em mixagem para shows, estúdio e TV, além de masterização, restauração de áudio e mentoria 1:1 para profissionais que querem aprofundar sua técnica.
           </p>
 
           <div className="flex flex-wrap gap-6 mt-10">
