@@ -1,90 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+
+const BLOG_URL = 'https://www.blog.emersonporfaaudio.com.br';
+
+const navItems = [
+  { label: 'Início', href: '#hero' },
+  { label: 'Sobre', href: '#sobre' },
+  { label: 'Serviços', href: '#servicos' },
+  { label: 'Trabalhos', href: '#portfolio' },
+];
 
 const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const BLOG_URL = "https://www.blog.emersonporfaaudio.com.br";
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen ? 'bg-black/95 backdrop-blur-sm py-3 border-b border-white/10' : 'bg-transparent py-6'
-        }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        scrolled || menuOpen
+          ? 'bg-void/95 backdrop-blur-sm py-3 border-b border-[color:var(--hairline)]'
+          : 'bg-transparent py-6'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-
-        {/* Logo Style: Jeff Moberg (Bold + Lines) */}
-        <a href="#" className="flex flex-col group z-50 items-start transform scale-90 origin-left">
-          <h1 className="text-xl md:text-2xl font-display font-bold text-white leading-none tracking-tight group-hover:text-neutral-300 transition-colors">
-            EMERSON PORFA
-          </h1>
-          <div className="flex items-center gap-2 w-full mt-1">
-            <div className="h-[1px] bg-[var(--accent)] flex-grow"></div>
-            <span className="text-[8px] md:text-[9px] font-sans font-bold tracking-[0.4em] text-white transition-colors uppercase">
-              AUDIO
-            </span>
-            <div className="h-[1px] bg-[var(--accent)] flex-grow"></div>
-          </div>
+        <a href="#hero" className="z-50 group inline-flex" aria-label="Emerson Porfa Áudio">
+          <img
+            src="/logo.png"
+            alt="Emerson Porfa Áudio"
+            className={`object-contain transition-all duration-500 group-hover:opacity-90 ${
+              scrolled || menuOpen ? 'h-14 md:h-16' : 'h-20 md:h-24'
+            }`}
+          />
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-10">
-          <a href="#hero" className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300">Início</a>
-          <a href="#sobre" className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300">Sobre</a>
-          <a href="#servicos" className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300">Serviços</a>
-          <a href="#portfolio" className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300">Portfólio</a>
-
+        <nav className="hidden md:flex items-center gap-9">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="font-mono text-[11px] font-medium text-ash hover:text-bone transition-colors uppercase tracking-[0.18em]"
+            >
+              {item.label}
+            </a>
+          ))}
           <a
             href={BLOG_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[12px] font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-[0.2em] hover:scale-105 transform duration-300 flex items-center gap-1"
+            className="font-mono text-[11px] font-medium text-ash hover:text-bone transition-colors uppercase tracking-[0.18em] flex items-center gap-1"
           >
-            Blog <ExternalLink className="w-3 h-3 mb-1" />
+            Blog <ArrowUpRight className="w-3 h-3" />
           </a>
-
-          <a
-            href="#contato"
-            className="text-[10px] font-bold text-black bg-white px-5 py-1.5 hover:bg-neutral-300 transition-all uppercase tracking-[0.2em]"
-          >
+          <a href="#contato" className="btn-signal !py-2.5 !px-5">
             Contato
           </a>
         </nav>
 
-        {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden z-50 text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden z-50 text-bone"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {menuOpen ? <X /> : <Menu />}
         </button>
 
-        {/* Mobile Menu Overlay */}
-        {isMobileMenuOpen && (
-          <div className="fixed inset-0 bg-black flex flex-col items-center justify-center gap-8 md:hidden">
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#hero" className="text-2xl font-display text-white uppercase tracking-widest">Início</a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#sobre" className="text-2xl font-display text-white uppercase tracking-widest">Sobre</a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#servicos" className="text-2xl font-display text-white uppercase tracking-widest">Serviços</a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#portfolio" className="text-2xl font-display text-white uppercase tracking-widest">Portfólio</a>
+        {menuOpen && (
+          <div className="fixed inset-0 bg-void flex flex-col items-center justify-center gap-8 md:hidden">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                onClick={() => setMenuOpen(false)}
+                href={item.href}
+                className="font-display text-2xl text-bone uppercase tracking-widest"
+              >
+                {item.label}
+              </a>
+            ))}
             <a
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => setMenuOpen(false)}
               href={BLOG_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-2xl font-display text-white uppercase tracking-widest flex items-center gap-2"
+              className="font-display text-2xl text-bone uppercase tracking-widest flex items-center gap-2"
             >
-              Blog <ExternalLink className="w-5 h-5" />
+              Blog <ArrowUpRight className="w-5 h-5" />
             </a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#contato" className="text-2xl font-bold font-display text-black bg-white px-8 py-3 uppercase tracking-widest mt-4">Contato</a>
+            <a
+              onClick={() => setMenuOpen(false)}
+              href="#contato"
+              className="btn-signal mt-2"
+            >
+              Contato
+            </a>
           </div>
         )}
       </div>
