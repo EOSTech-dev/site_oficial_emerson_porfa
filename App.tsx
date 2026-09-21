@@ -1,21 +1,29 @@
 import React from 'react';
+import Ambient from './components/Ambient';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
+import Stats from './components/Stats';
 import About from './components/About';
+import Services from './components/Services';
+import Process from './components/Process';
+import Portfolio from './components/Portfolio';
+import InstagramFeed from './components/InstagramFeed';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans selection:bg-white selection:text-black">
+    <div className="relative text-ash min-h-screen font-sans selection:bg-signal selection:text-void">
+      <Ambient />
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
+        <Stats />
         <About />
         <Services />
+        <Process />
         <Portfolio />
+        <InstagramFeed />
         <Contact />
       </main>
       <Footer />

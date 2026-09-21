@@ -1,64 +1,132 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
+const VIDEO_SRC = '/hero-loop.mp4';
+const POSTER_SRC = '/hero-poster.jpg';
+
 const Hero: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [entered, setEntered] = useState(false);
+  const [reduce, setReduce] = useState(false);
+
+  useEffect(() => {
+    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setReduce(rm);
+
+    // trigger the copy entrance after mount
+    const t = setTimeout(() => setEntered(true), 180);
+
+    const v = videoRef.current;
+    if (v && !rm) {
+      v.play().catch(() => {
+        /* autoplay blocked: poster stays, still fine */
+      });
+    }
+    return () => clearTimeout(t);
+  }, []);
+
+  const step = (i: number) =>
+    `transition-all duration-700 ease-[cubic-bezier(0.2,0,0,1)] ${
+      entered ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-3 blur-[6px]'
+    }`;
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center bg-black overflow-hidden pt-24 md:pt-32">
-
-      {/* Background Depth Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--accent)] opacity-[0.03] blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-white opacity-[0.02] blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2"></div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row items-center gap-12">
-
-        {/* Left: Typography */}
-        <div className="w-full md:w-3/5 reveal z-20">
-          <h1 className="text-7xl md:text-9xl font-display font-bold leading-[0.85] tracking-tighter mb-4 max-w-2xl">
-            EMERSON<br />
-            <span className="text-outline text-transparent opacity-80" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>PORFA</span>
-          </h1>
-
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-[2px] w-20 bg-[var(--accent)]"></div>
-            <span className="text-xs font-bold text-white uppercase tracking-[0.4em]">ÁUDIO</span>
-            <div className="h-[2px] w-20 bg-[var(--accent)]"></div>
-          </div>
-
-          <p className="text-lg md:text-xl text-neutral-400 max-w-md leading-relaxed mb-12 font-light border-l border-white/10 pl-8">
-            Somando experiência em estrada e estúdio para entregar a melhor solução técnica em áudio. Compromisso com a qualidade do sinal e o respeito aos detalhes que fazem cada espetáculo único.
-          </p>
-
-          <div className="flex flex-wrap gap-6 mt-10">
-            <a href="#servicos" className="btn-technical">
-              Ver Serviços
-            </a>
-            <a href="#contato" className="px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-neutral-500 hover:text-white transition-colors">
-              Iniciar Projeto
-            </a>
-          </div>
-        </div>
-
-        {/* Right: Personal Photo with Blending */}
-        <div className="w-full md:w-2/5 relative reveal delay-200 flex justify-center md:justify-end">
-          <div className="relative w-full aspect-[4/5] max-w-md">
-            {/* Blending Effect Container */}
-            <div className="absolute inset-0 z-10 pointer-events-none">
-              <div className="w-full h-full photo-mask bg-black/20"></div>
-            </div>
-
-            <img
-              src="/foto_pessoal.jpg"
-              alt="Emerson Porfa"
-              className="w-full h-full object-cover grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-1000 photo-mask"
-            />
-          </div>
-        </div>
-
+    <section
+      id="hero"
+      className="relative min-h-[100svh] flex items-center overflow-hidden pt-28 md:pt-32"
+    >
+      {/* Media */}
+      <div className="absolute inset-0">
+        <img
+          src={POSTER_SRC}
+          alt="Emerson Porfa no estúdio, na mesa de mixagem"
+          className={`absolute inset-0 w-full h-full object-cover ${reduce ? 'opacity-100' : 'opacity-0'}`}
+        />
+        {!reduce && (
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover"
+            src={VIDEO_SRC}
+            poster={POSTER_SRC}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            tabIndex={-1}
+          />
+        )}
+        {/* legibility wash */}
+        <div className="absolute inset-0 bg-gradient-to-r from-void via-void/80 to-void/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-void/50" />
       </div>
 
-      {/* Centered Scroll Indicator (Blinking Arrow) */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
-        <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+      {/* Dust */}
+      {!reduce && (
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 14 }).map((_, i) => (
+            <span
+              key={i}
+              className="dust-mote"
+              style={{
+                left: `${8 + (i * 6.1) % 55}%`,
+                top: `${32 + (i * 41) % 52}%`,
+                animationDuration: `${8 + (i % 5) * 2.6}s`,
+                animationDelay: `${(i % 7) * 1.2}s`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Copy */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="max-w-2xl">
+          <p className={`eyebrow mb-6 ${step(0)}`} style={{ transitionDelay: '0ms' }}>
+            Engenheiro de Áudio · 35 anos de estrada e estúdio
+          </p>
+
+          <h1 className="font-display leading-[0.92] tracking-tight mb-7">
+            <span
+              className={`block text-4xl md:text-6xl font-thin text-bone ${step(1)}`}
+              style={{ transitionDelay: '120ms' }}
+            >
+              O som certo
+            </span>
+            <span
+              className={`block text-5xl md:text-8xl font-black text-bone ${step(2)}`}
+              style={{ transitionDelay: '240ms' }}
+            >
+              raramente é
+            </span>
+            <span
+              className={`signal-block text-5xl md:text-8xl font-black mt-2 ${step(3)}`}
+              style={{ transitionDelay: '380ms' }}
+            >
+              acidente
+            </span>
+          </h1>
+
+          <p
+            className={`text-ash text-base md:text-lg max-w-lg leading-relaxed mb-10 border-l border-[color:var(--hairline)] pl-6 ${step(4)}`}
+            style={{ transitionDelay: '560ms' }}
+          >
+            Mixagem, masterização, restauração, edição e mentoria. Um ofício com um objetivo:
+            o som chegar inteiro a quem ouve.
+          </p>
+
+          <div
+            className={`flex flex-wrap gap-5 ${step(5)}`}
+            style={{ transitionDelay: '700ms' }}
+          >
+            <a href="#contato" className="btn-signal">Iniciar projeto</a>
+            <a href="#servicos" className="btn-ghost">Ver serviços</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-9 left-1/2 -translate-x-1/2">
+        <ChevronDown className="w-5 h-5 text-bone scroll-hint" />
       </div>
     </section>
   );

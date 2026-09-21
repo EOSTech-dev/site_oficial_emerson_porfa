@@ -8,30 +8,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          900: '#0a0a0a', 
-          950: '#050505',
-        }
+        void: '#0a0a0c',
+        surface: '#141417',
+        'surface-2': '#1c1c21',
+        signal: '#ff5200',
+        ember: '#b23300',
+        bone: '#f4f2ef',
+        ash: '#9a9aa2',
+        dust: '#5a5a62',
       },
       fontFamily: {
-        sans: ['Montserrat', 'sans-serif'],
-        display: ['Oswald', 'sans-serif'],
+        sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        display: ['Archivo', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+      },
+      letterSpacing: {
+        label: '0.28em',
       },
       animation: {
-        'gradient': 'gradient 15s ease infinite',
         'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'drift': 'drift 14s ease-in-out infinite alternate',
       },
       keyframes: {
-        gradient: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
         fadeIn: {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
-        }
-      }
+        },
+        drift: {
+          '0%': { transform: 'translate3d(0,0,0)' },
+          '100%': { transform: 'translate3d(-2%, 1%, 0)' },
+        },
+      },
     },
   },
   plugins: [],
