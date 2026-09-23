@@ -120,7 +120,7 @@ const Hero: React.FC = () => {
             style={{ transitionDelay: '700ms' }}
           >
             <a href="#contato" className="btn-signal">Iniciar projeto</a>
-            <a href="#servicos" className="btn-ghost">Ver serviços</a>
+            <a href="https://www.kolbiemusic.com.br" target="_blank" rel="noopener noreferrer" className="btn-ghost">Serviços na Kolbie Music</a>
           </div>
         </div>
       </div>

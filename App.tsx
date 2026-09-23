@@ -5,7 +5,6 @@ import Hero from './components/Hero';
 import Stats from './components/Stats';
 import About from './components/About';
 import Services from './components/Services';
-import Process from './components/Process';
 import Portfolio from './components/Portfolio';
 import InstagramFeed from './components/InstagramFeed';
 import Contact from './components/Contact';
@@ -21,7 +20,6 @@ function App() {
         <Stats />
         <About />
         <Services />
-        <Process />
         <Portfolio />
         <InstagramFeed />
         <Contact />

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
+const KOLBIE_URL = 'https://www.kolbiemusic.com.br';
 const BLOG_URL = 'https://www.blog.emersonporfaaudio.com.br';
 
 const navItems = [
   { label: 'Início', href: '#hero' },
   { label: 'Sobre', href: '#sobre' },
-  { label: 'Serviços', href: '#servicos' },
   { label: 'Trabalhos', href: '#portfolio' },
 ];
 
@@ -51,6 +51,14 @@ const Header: React.FC = () => {
             </a>
           ))}
           <a
+            href={KOLBIE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[11px] font-medium text-ash hover:text-bone transition-colors uppercase tracking-[0.18em] flex items-center gap-1"
+          >
+            Serviços <ArrowUpRight className="w-3 h-3" />
+          </a>
+          <a
             href={BLOG_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -83,6 +91,15 @@ const Header: React.FC = () => {
                 {item.label}
               </a>
             ))}
+            <a
+              onClick={() => setMenuOpen(false)}
+              href={KOLBIE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-display text-2xl text-bone uppercase tracking-widest flex items-center gap-2"
+            >
+              Serviços <ArrowUpRight className="w-5 h-5" />
+            </a>
             <a
               onClick={() => setMenuOpen(false)}
               href={BLOG_URL}

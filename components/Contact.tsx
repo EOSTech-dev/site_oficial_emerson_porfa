@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
           <h2 className="text-5xl md:text-7xl font-display font-bold text-bone tracking-tight mb-3">
             Contato
           </h2>
-          <p className="eyebrow">Orçamentos e conversas</p>
+          <p className="eyebrow">Mentoria e conversas</p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-px bg-[color:var(--hairline)] border border-[color:var(--hairline)]">
@@ -222,7 +222,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="service" className="font-mono text-[9px] uppercase tracking-[0.24em] text-dust ml-1">
-                      Serviço
+                      Assunto
                     </label>
                     <div className="relative">
                       <select
@@ -234,12 +234,10 @@ const Contact: React.FC = () => {
                         className="field appearance-none"
                       >
                         <option value="" disabled className="bg-void">Selecione</option>
-                        <option value="Mixagem" className="bg-void">Mixagem</option>
-                        <option value="Masterizacao" className="bg-void">Masterização</option>
-                        <option value="Restauracao" className="bg-void">Restauração</option>
-                        <option value="Edicao" className="bg-void">Edição de Áudio</option>
                         <option value="Mentoria" className="bg-void">Mentoria 1:1</option>
-                        <option value="Outro" className="bg-void">Outro projeto</option>
+                        <option value="Parceria" className="bg-void">Parceria</option>
+                        <option value="Imprensa" className="bg-void">Imprensa</option>
+                        <option value="Outro" className="bg-void">Outro assunto</option>
                       </select>
                       <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-signal text-[8px]">
                         ▼
